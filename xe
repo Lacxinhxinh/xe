@@ -1,0 +1,122 @@
+package car;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class xe {
+	private String automaker;
+	private String name;
+	private String type;
+	private int amount;
+	private float Entryprice;
+	private float price;
+	private int cc;
+
+	// get,set
+	public String getAutomaker() {
+		return automaker;
+	}
+
+	public void setAutomaker(String automaker) {
+		this.automaker = automaker;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public float getEntryprice() {
+		return Entryprice;
+	}
+
+	public void setEntryprice(float entryprice) {
+		Entryprice = entryprice;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getcc() {
+		return cc;
+	}
+
+	public void setcc() {
+		this.cc = cc;
+	}
+
+	// setall
+	public void setall(String automaker, String name, String type, int amount, float entryprice, float price, int cc) {
+		this.automaker = automaker;
+		this.name = name;
+		this.type = type;
+		this.amount = amount;
+		this.Entryprice = entryprice;
+		this.price = price;
+		this.cc = cc;
+	}
+
+	// constructor
+	public xe() {
+	}
+
+	public xe(String automaker, String name, String type, int amount, float entryprice, float price, int cc) {
+		this.automaker = automaker;
+		this.name = name;
+		this.type = type;
+		this.amount = amount;
+		this.Entryprice = entryprice;
+		this.price = price;
+		this.cc = cc;
+
+	}
+
+	// nhap
+	public void input() {
+
+		Scanner sc = new Scanner(System.in);
+		automaker = sc.nextLine();
+		name = sc.nextLine();
+		type = sc.nextLine();
+		amount = new Scanner(System.in).nextInt();
+		Entryprice = new Scanner(System.in).nextFloat();
+		price = new Scanner(System.in).nextFloat();
+		cc = new Scanner(System.in).nextInt();
+	}
+	// hienthi
+
+	public void display() {
+		System.out.println("Hãng xe: " + getAutomaker());
+		System.out.println("Ten xe: " + getName());
+		System.out.println("Loai xe: " + getType());
+		System.out.println("Số lượng: " + getAmount());
+		System.out.println("Gía nhâp: " + getEntryprice());
+		System.out.println("Gía bán: " + getPrice());
+		System.out.println("Phân khối: " + getcc());
+	}
+
+}
