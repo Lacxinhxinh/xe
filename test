@@ -1,0 +1,108 @@
+package car;
+
+import java.io.BufferedReader;
+
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class test {
+	// nhap vao file
+	public static void outputfile(ArrayList<xe> list) {
+
+		try {
+			// duong dan
+			FileWriter fw = new FileWriter("D:\\xe.txt");
+			// nhap
+			BufferedWriter bw = new BufferedWriter(fw);
+			// duyet de viet vao file
+			for (xe cc : list) {
+				String st = cc.getAutomaker() + ";" + cc.getName() + ";" + cc.getType() + ";" + cc.getAmount() + ";"
+						+ cc.getEntryprice() + ";" + cc.getPrice() + ";" + cc.getcc();
+
+				bw.write(st);
+				bw.newLine();
+			}
+			// dong
+			bw.close();
+			fw.close();
+
+			// loi
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// loi file ra
+	public static ArrayList<xe> inputfile() {
+		// mang
+		ArrayList<xe> list = new ArrayList<xe>();
+
+		try {
+			// duong dan
+			FileReader fr = new FileReader("D:\\xe.txt");
+			// doc file
+			BufferedReader br = new BufferedReader(fr);
+			while (true) {
+				// doc theo dong
+				String st = br.readLine();
+				// neu bang null hoac rong thi thoat
+				if (st == null || st == "")
+					break;
+				// tach ra
+				String[] dt = st.split("[;]");
+				// gan vao
+				xe data = new xe(dt[0], dt[1], dt[2], Integer.parseInt(dt[3]), Float.parseFloat(dt[4]),
+						Float.parseFloat(dt[5]), Integer.parseInt(dt[6]));
+				list.add(data);
+
+			}
+			// dong
+
+			br.close();
+			fr.close();
+			// loi
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	// ham de lua chon
+	public static void display_car() {
+		// mang
+		ArrayList<xe> list = new ArrayList<xe>();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Nhap 1 de outputfile!!Nhap 2 de inputfile!!Nhap 3 de thoat chuong trinh");
+		int n = sc.nextInt();
+		while (true) {
+			switch (n) {
+			case 1:
+				outputfile(list);
+				break;
+			case 2:
+				list = inputfile();
+				break;
+			case 3:
+				System.out.println("ban cut");
+				System.exit(0);
+				break;
+			default:
+
+				System.out.println("nhap sai,nhap lai!!!!");
+				n = sc.nextInt();
+				break;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		ArrayList<xe> list = new ArrayList<xe>();
+		display_car();
+	}
+
+}
