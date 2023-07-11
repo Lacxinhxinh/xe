@@ -1,0 +1,207 @@
+package car;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class xe {
+	private String automaker;
+	private String name;
+	private String type;
+	private int amount;
+	private float Entryprice;
+	private float price;
+	private int cc;
+
+	// get,set
+	public String getAutomaker() {
+		return automaker;
+	}
+
+	public void setAutomaker(String automaker) {
+		this.automaker = automaker;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public float getEntryprice() {
+		return Entryprice;
+	}
+
+	public void setEntryprice(float entryprice) {
+		Entryprice = entryprice;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getcc() {
+		return cc;
+	}
+
+	public void setcc() {
+		this.cc = cc;
+	}
+
+	// setall
+	public void setall(String automaker, String name, String type, int amount, float entryprice, float price, int cc) {
+		this.automaker = automaker;
+		this.name = name;
+		this.type = type;
+		this.amount = amount;
+		this.Entryprice = entryprice;
+		this.price = price;
+		this.cc = cc;
+	}
+
+	// constructor
+	public xe() {
+	}
+
+	public xe(String automaker, String name, String type, int amount, float entryprice, float price, int cc) {
+		this.automaker = automaker;
+		this.name = name;
+		this.type = type;
+		this.amount = amount;
+		this.Entryprice = entryprice;
+		this.price = price;
+		this.cc = cc;
+
+	}
+
+	// nhap
+	public void input() {
+
+		Scanner sc = new Scanner(System.in);
+		automaker = sc.nextLine();
+		name = sc.nextLine();
+		type = sc.nextLine();
+		amount = new Scanner(System.in).nextInt();
+		Entryprice = new Scanner(System.in).nextFloat();
+		price = new Scanner(System.in).nextFloat();
+		cc = new Scanner(System.in).nextInt();
+	}
+	// hienthi
+
+	public void display() {
+		System.out.println("Hãng xe: " + getAutomaker());
+		System.out.println("Ten xe: " + getName());
+		System.out.println("Loai xe: " + getType());
+		System.out.println("Số lượng: " + getAmount());
+		System.out.println("Gía nhâp: " + getEntryprice());
+		System.out.println("Gía bán: " + getPrice());
+		System.out.println("Phân khối: " + getcc());
+	}
+	//nhapfile
+	public static void outputfile(ArrayList<xe> list) {
+
+		try {
+			// duong dan
+			FileWriter fw = new FileWriter("D:\\BTatien\\car\\xe.txt");
+			// nhap
+			BufferedWriter bw = new BufferedWriter(fw);
+			// duyet de viet vao file
+			for (xe cc : list) {
+				String st = cc.getAutomaker() + ";" + cc.getName() + ";" + cc.getType() + ";" + cc.getAmount() + ";"
+						+ cc.getEntryprice() + ";" + cc.getPrice() + ";" + cc.getcc();
+
+				bw.write(st);
+				bw.newLine();
+			}
+			// dong
+			bw.close();
+			fw.close();
+
+			// loi
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// loi file ra
+		public static ArrayList<xe> inputfile() {
+			// mang
+			ArrayList<xe> list = new ArrayList<xe>();
+
+			try {
+				// duong dan
+				FileReader fr = new FileReader("D:\\xe.txt");
+				// doc file
+				BufferedReader br = new BufferedReader(fr);
+				while (true) {
+					// doc theo dong
+					String st = br.readLine();
+					// neu bang null hoac rong thi thoat
+					if (st == null || st == "")
+						break;
+					// tach ra
+					String[] dt = st.split("[;]");
+					// gan vao
+					xe data = new xe(dt[0], dt[1], dt[2], Integer.parseInt(dt[3]), Float.parseFloat(dt[4]),
+							Float.parseFloat(dt[5]), Integer.parseInt(dt[6]));
+					list.add(data);
+
+				}
+				// dong
+
+				br.close();
+				fr.close();
+				// loi
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return list;
+		}
+		public  void display_xe() {
+			ArrayList<xe> list = new ArrayList<xe>();
+			while(true) {
+				
+				System.out.println("nhan 1 de inputfile! nhan 2 de outputfile ! nhan 3 de thoat");
+				int n=new Scanner(System.in).nextInt();	
+				switch(n) {
+				case 1: outputfile(list); break;
+				case 2: list= inputfile(); break;
+				case 3: System.out.println("chim cut");
+						System.exit(0);
+						break;
+						
+						default: System.out.println("nhap sai nhap lai!!!!");
+									n= new Scanner(System.in).nextInt();
+						
+				
+				}
+			}
+		}
+
+}
